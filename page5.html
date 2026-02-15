@@ -126,6 +126,15 @@
             50% { transform: translateX(10px); }
         }
 
+        @keyframes slideToRight {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(100vw - 100%)); opacity: 0; }
+        }
+
+        .slide-btn.sliding {
+            animation: slideToRight 1s ease-out forwards;
+        }
+
         .sparkle {
             position: fixed;
             width: 10px;
@@ -315,7 +324,10 @@
 
         if (slideBtn) {
             slideBtn.addEventListener('click', () => {
-                window.location.href = 'page6.html';
+                slideBtn.classList.add('sliding');
+                setTimeout(() => {
+                    window.location.href = 'page6.html';
+                }, 1000);
             });
         }
 
