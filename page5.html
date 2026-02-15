@@ -131,6 +131,17 @@
             100% { transform: translateX(calc(100vw - 100%)); opacity: 0; }
         }
 
+        @keyframes butterflyFade {
+            0% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.5) translateY(-30px);
+            }
+        }
+
         .slide-btn.sliding {
             animation: slideToRight 1s ease-out forwards;
         }
@@ -325,10 +336,54 @@
         if (slideBtn) {
             slideBtn.addEventListener('click', () => {
                 slideBtn.classList.add('sliding');
+                
+                // Create butterfly trail
+                let trailInterval = setInterval(() => {
+                    createTrailButterfly(slideBtn);
+                }, 50);
+                
                 setTimeout(() => {
+                    clearInterval(trailInterval);
                     window.location.href = 'page6.html';
                 }, 1000);
             });
+        }
+
+        function createTrailButterfly(button) {
+            const rect = button.getBoundingClientRect();
+            const butterfly = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            butterfly.style.position = 'fixed';
+            butterfly.style.left = rect.left + rect.width / 2 + 'px';
+            butterfly.style.top = rect.top + rect.height / 2 + 'px';
+            butterfly.style.width = '40px';
+            butterfly.style.height = '40px';
+            butterfly.style.pointerEvents = 'none';
+            butterfly.style.zIndex = '999';
+            butterfly.setAttribute('viewBox', '0 0 60 60');
+            
+            const colors = ['#ff69b4', '#ff1493', '#ffb6c1', '#ffc0cb'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
+            butterfly.innerHTML = `
+                <g style="animation: butterflyFade 1s ease-out forwards;">
+                    <ellipse cx="20" cy="25" rx="12" ry="15" fill="${color}" opacity="0.9">
+                        <animateTransform attributeName="transform" type="scale" values="1,1;1.2,0.8;1,1" dur="0.3s" repeatCount="indefinite"/>
+                    </ellipse>
+                    <ellipse cx="40" cy="25" rx="12" ry="15" fill="${color}" opacity="0.9">
+                        <animateTransform attributeName="transform" type="scale" values="1,1;1.2,0.8;1,1" dur="0.3s" repeatCount="indefinite"/>
+                    </ellipse>
+                    <ellipse cx="30" cy="30" rx="3" ry="12" fill="${color}"/>
+                    <circle cx="30" cy="20" r="4" fill="${color}"/>
+                    <circle cx="20" cy="25" r="4" fill="white" opacity="0.6"/>
+                    <circle cx="40" cy="25" r="4" fill="white" opacity="0.6"/>
+                </g>
+            `;
+            
+            document.body.appendChild(butterfly);
+            
+            setTimeout(() => {
+                butterfly.remove();
+            }, 1000);
         }
 
         function createSparkle() {
