@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Treasure</title>
+    <link rel="stylesheet" href="page2.css">
+    <style>
+        .treasure-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            filter: drop-shadow(0 0 20px rgba(255, 182, 193, 0.4));
+        }
+
+        .treasure-chest {
+            animation: shake 0.5s infinite;
+            filter: drop-shadow(0 5px 15px rgba(255, 105, 180, 0.3));
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-3deg); }
+            75% { transform: rotate(3deg); }
+        }
+
+        .treasure-chest.opened {
+            animation: none;
+        }
+
+        .letter-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.6s ease;
+        }
+
+        .letter-container.show {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+
+        .letter {
+            background: linear-gradient(135deg, #fff9e6 0%, #fffef0 100%);
+            width: 500px;
+            padding: 50px 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            position: relative;
+            border: 3px solid #ffd700;
+        }
+
+        .ribbon {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 40px;
+            background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.4);
+        }
+
+        .ribbon::before,
+        .ribbon::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+
+        .ribbon::before {
+            left: -20px;
+            border-width: 20px 20px 20px 0;
+            border-color: transparent #ff1493 transparent transparent;
+        }
+
+        .ribbon::after {
+            right: -20px;
+            border-width: 20px 0 20px 20px;
+            border-color: transparent transparent transparent #ff1493;
+        }
+
+        .letter h2 {
+            color: #ff1493;
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 30px;
+            margin-top: 20px;
+        }
+
+        .letter p {
+            color: #333;
+            text-align: center;
+            font-size: 20px;
+            line-height: 1.8;
+        }
+
+        .slide-btn {
+            margin-top: 30px;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.4);
+            animation: slideButton 2s ease-in-out infinite;
+            transition: transform 0.3s ease;
+        }
+
+        .slide-btn:hover {
+            transform: scale(1.1);
+        }
+
+        @keyframes slideButton {
+            0%, 100% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); }
+        }
+
+        .sparkle {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #ffd700;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkleAnim 1s ease-out forwards;
+        }
+
+        @keyframes sparkleAnim {
+            0% {
+                transform: scale(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(3) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="treasure-container" id="treasureContainer">
+        <svg class="treasure-chest" id="treasureChest" width="350" height="300" viewBox="0 0 350 300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="chestGold" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#ffd700"/>
+                    <stop offset="50%" style="stop-color:#ffed4e"/>
+                    <stop offset="100%" style="stop-color:#daa520"/>
+                </linearGradient>
+                <linearGradient id="chestWood" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#d2691e"/>
+                    <stop offset="30%" style="stop-color:#cd853f"/>
+                    <stop offset="70%" style="stop-color:#8b4513"/>
+                    <stop offset="100%" style="stop-color:#8b4513"/>
+                </linearGradient>
+                <linearGradient id="chestDark" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:#8b4513"/>
+                    <stop offset="50%" style="stop-color:#654321"/>
+                    <stop offset="100%" style="stop-color:#654321"/>
+                </linearGradient>
+                <filter id="shadow">
+                    <feDropShadow dx="0" dy="10" stdDeviation="8" flood-opacity="0.4"/>
+                </filter>
+            </defs>
+            
+            <!-- Shadow base -->
+            <ellipse cx="175" cy="270" rx="120" ry="20" fill="rgba(0,0,0,0.2)"/>
+            
+            <!-- Chest bottom part -->
+            <rect x="60" y="150" width="230" height="120" fill="url(#chestWood)" stroke="#654321" stroke-width="4" rx="15" filter="url(#shadow)"/>
+            
+            <!-- Subtle pink glow overlay -->
+            <rect x="60" y="150" width="230" height="120" fill="rgba(255, 182, 193, 0.08)" rx="15"/>
+            
+            <!-- Wood planks detail -->
+            <rect x="70" y="160" width="210" height="15" fill="url(#chestDark)" opacity="0.3" rx="3"/>
+            <rect x="70" y="195" width="210" height="15" fill="url(#chestDark)" opacity="0.3" rx="3"/>
+            <rect x="70" y="230" width="210" height="15" fill="url(#chestDark)" opacity="0.3" rx="3"/>
+            
+            <!-- Chest lid (closed) -->
+            <g id="chestLid">
+                <!-- Lid top curved part -->
+                <path d="M 60 150 Q 60 80 175 60 Q 290 80 290 150 Z" fill="url(#chestWood)" stroke="#654321" stroke-width="4"/>
+                
+                <!-- Subtle pink glow on lid -->
+                <path d="M 60 150 Q 60 80 175 60 Q 290 80 290 150 Z" fill="rgba(255, 182, 193, 0.08)"/>
+                
+                <!-- Lid wood planks -->
+                <path d="M 75 145 Q 75 95 175 80 Q 275 95 275 145" fill="url(#chestDark)" opacity="0.3"/>
+                
+                <!-- Gold decorative bands -->
+                <path d="M 60 150 Q 60 145 175 125 Q 290 145 290 150" fill="url(#chestGold)" stroke="#daa520" stroke-width="2"/>
+                <ellipse cx="175" cy="105" rx="100" ry="8" fill="url(#chestGold)" stroke="#daa520" stroke-width="2"/>
+                
+                <!-- Lock mechanism -->
+                <rect x="160" y="130" width="30" height="35" fill="url(#chestGold)" stroke="#daa520" stroke-width="2" rx="5"/>
+                <circle cx="175" cy="145" r="12" fill="#654321"/>
+                <circle cx="175" cy="145" r="8" fill="url(#chestGold)"/>
+                <rect x="172" y="145" width="6" height="15" fill="#654321" rx="2"/>
+            </g>
+            
+            <!-- Gold corner decorations -->
+            <circle cx="70" cy="160" r="8" fill="url(#chestGold)" stroke="#daa520" stroke-width="2"/>
+            <circle cx="280" cy="160" r="8" fill="url(#chestGold)" stroke="#daa520" stroke-width="2"/>
+            <circle cx="70" cy="260" r="8" fill="url(#chestGold)" stroke="#daa520" stroke-width="2"/>
+            <circle cx="280" cy="260" r="8" fill="url(#chestGold)" stroke="#daa520" stroke-width="2"/>
+            
+            <!-- Gold horizontal bands on bottom -->
+            <rect x="60" y="180" width="230" height="10" fill="url(#chestGold)" stroke="#daa520" stroke-width="1" rx="2"/>
+            <rect x="60" y="240" width="230" height="10" fill="url(#chestGold)" stroke="#daa520" stroke-width="1" rx="2"/>
+            
+            <!-- Shine effects -->
+            <ellipse cx="110" cy="190" rx="25" ry="40" fill="white" opacity="0.15"/>
+            <ellipse cx="200" cy="100" rx="30" ry="20" fill="white" opacity="0.2"/>
+        </svg>
+    </div>
+
+    <div class="letter-container" id="letterContainer">
+        <div class="letter">
+            <div class="ribbon"></div>
+            <h2>Your Goals Await! 🎯</h2>
+            <p>Myluu!! 💖</p>
+            <p>Focus on your short-term goals - achieve that weight loss, get into fitness, and build your strength!</p>
+            <p>One step at a time, you'll reach everything you're working towards. I believe in you! ✨</p>
+            <button class="slide-btn" id="slideBtn">Click Here →</button>
+        </div>
+    </div>
+
+    <canvas id="butterflyCanvas"></canvas>
+    <canvas id="sunflowerCanvas"></canvas>
+    
+    <script src="page2.js"></script>
+    <script>
+        const treasureContainer = document.getElementById('treasureContainer');
+        const treasureChest = document.getElementById('treasureChest');
+        const letterContainer = document.getElementById('letterContainer');
+        const slideBtn = document.getElementById('slideBtn');
+
+        treasureContainer.addEventListener('click', function() {
+            // Stop shaking
+            treasureChest.classList.add('opened');
+            
+            // Create sparkles
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    createSparkle();
+                }, i * 50);
+            }
+            
+            // Show letter after sparkles
+            setTimeout(() => {
+                treasureContainer.style.display = 'none';
+                letterContainer.classList.add('show');
+            }, 800);
+        });
+
+        if (slideBtn) {
+            slideBtn.addEventListener('click', () => {
+                window.location.href = 'page6.html';
+            });
+        }
+
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            
+            const x = window.innerWidth / 2 + (Math.random() - 0.5) * 400;
+            const y = window.innerHeight / 2 + (Math.random() - 0.5) * 400;
+            
+            sparkle.style.left = x + 'px';
+            sparkle.style.top = y + 'px';
+            sparkle.style.background = ['#ffd700', '#ff69b4', '#ff1493', '#ffb6c1'][Math.floor(Math.random() * 4)];
+            
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

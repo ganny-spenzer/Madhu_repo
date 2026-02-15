@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>We Still Have Time</title>
+    <link rel="stylesheet" href="page2.css">
+    <style>
+        body {
+            overflow: hidden;
+        }
+
+        .bloom-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .gift-card {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            background: linear-gradient(135deg, #fff 0%, #ffe8f5 100%);
+            padding: 60px;
+            border-radius: 25px;
+            box-shadow: 0 25px 70px rgba(255, 20, 147, 0.4);
+            border: 5px solid #ff69b4;
+            text-align: center;
+            animation: giftCardAppear 1s ease;
+            z-index: 100;
+        }
+
+        @keyframes giftCardAppear {
+            0% {
+                transform: translate(-50%, -50%) scale(0) rotateY(180deg);
+                opacity: 0;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1) rotateY(0deg);
+                opacity: 1;
+            }
+        }
+
+        .gift-card h1 {
+            color: #ff1493;
+            font-size: 56px;
+            margin: 0 0 30px 0;
+            text-shadow: 3px 3px 6px rgba(255, 20, 147, 0.3);
+            animation: textGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes textGlow {
+            0%, 100% { text-shadow: 3px 3px 6px rgba(255, 20, 147, 0.3); }
+            50% { text-shadow: 3px 3px 20px rgba(255, 20, 147, 0.6); }
+        }
+
+        .gift-card p {
+            color: #ff69b4;
+            font-size: 28px;
+            margin: 20px 0;
+        }
+
+        .gift-card .bottom-text {
+            margin-top: 40px;
+            font-size: 24px;
+            color: #ff1493;
+        }
+
+        .animated-butterfly {
+            position: fixed;
+            pointer-events: none;
+            z-index: 50;
+        }
+    </style>
+</head>
+<body>
+    <canvas class="bloom-canvas" id="bloomCanvas"></canvas>
+    
+    <div class="gift-card">
+        <h1>We Still Have Time! 😄</h1>
+        <p>No rush, no pressure...</p>
+        <p>Just us, taking things at our own pace 💕</p>
+        <div class="bottom-text">Hope I made you smile! 😊</div>
+    </div>
+
+    <canvas id="butterflyCanvas"></canvas>
+    <canvas id="sunflowerCanvas"></canvas>
+    <script src="page2.js"></script>
+    <script>
+        // Pink Bloom Effect
+        const bloomCanvas = document.getElementById('bloomCanvas');
+        const bloomCtx = bloomCanvas.getContext('2d');
+        bloomCanvas.width = window.innerWidth;
+        bloomCanvas.height = window.innerHeight;
+
+        class BloomParticle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * bloomCanvas.width;
+                this.y = Math.random() * bloomCanvas.height;
+                this.size = Math.random() * 80 + 40;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.3 + 0.1;
+                this.life = Math.random() * 200 + 100;
+                this.maxLife = this.life;
+                this.hue = Math.random() * 20 + 320; // Pink hues
+                this.pulseSpeed = Math.random() * 0.02 + 0.01;
+                this.pulsePhase = Math.random() * Math.PI * 2;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.life--;
+                this.pulsePhase += this.pulseSpeed;
+
+                if (this.life <= 0 || this.x < -100 || this.x > bloomCanvas.width + 100 || 
+                    this.y < -100 || this.y > bloomCanvas.height + 100) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                const pulse = Math.sin(this.pulsePhase) * 0.3 + 0.7;
+                const currentSize = this.size * pulse;
+                const lifeRatio = this.life / this.maxLife;
+                const currentOpacity = this.opacity * lifeRatio;
+
+                // Create gradient bloom
+                const gradient = bloomCtx.createRadialGradient(
+                    this.x, this.y, 0,
+                    this.x, this.y, currentSize
+                );
+                
+                gradient.addColorStop(0, `hsla(${this.hue}, 100%, 75%, ${currentOpacity * 0.8})`);
+                gradient.addColorStop(0.3, `hsla(${this.hue}, 100%, 65%, ${currentOpacity * 0.5})`);
+                gradient.addColorStop(0.6, `hsla(${this.hue}, 100%, 55%, ${currentOpacity * 0.2})`);
+                gradient.addColorStop(1, `hsla(${this.hue}, 100%, 45%, 0)`);
+
+                bloomCtx.fillStyle = gradient;
+                bloomCtx.beginPath();
+                bloomCtx.arc(this.x, this.y, currentSize, 0, Math.PI * 2);
+                bloomCtx.fill();
+
+                // Add sparkle effect
+                if (Math.random() > 0.98) {
+                    bloomCtx.fillStyle = `hsla(${this.hue}, 100%, 90%, ${currentOpacity * 1.5})`;
+                    bloomCtx.beginPath();
+                    bloomCtx.arc(this.x, this.y, currentSize * 0.1, 0, Math.PI * 2);
+                    bloomCtx.fill();
+                }
+            }
+        }
+
+        const bloomParticles = [];
+        for (let i = 0; i < 60; i++) {
+            bloomParticles.push(new BloomParticle());
+        }
+
+        function animateBloom() {
+            bloomCtx.clearRect(0, 0, bloomCanvas.width, bloomCanvas.height);
+
+            bloomParticles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            requestAnimationFrame(animateBloom);
+        }
+
+        animateBloom();
+
+        window.addEventListener('resize', () => {
+            bloomCanvas.width = window.innerWidth;
+            bloomCanvas.height = window.innerHeight;
+        });
+
+        // Create animated butterflies
+        function createAnimatedButterfly() {
+            const butterfly = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+            butterfly.classList.add('animated-butterfly');
+            butterfly.setAttribute('width', '60');
+            butterfly.setAttribute('height', '60');
+            butterfly.setAttribute('viewBox', '0 0 60 60');
+            
+            const colors = ['#ff69b4', '#ff1493', '#ffb6c1', '#ffc0cb'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
+            butterfly.innerHTML = `
+                <g>
+                    <ellipse cx="20" cy="25" rx="12" ry="15" fill="${color}" opacity="0.9">
+                        <animateTransform attributeName="transform" type="scale" values="1,1;1.2,0.8;1,1" dur="0.3s" repeatCount="indefinite"/>
+                    </ellipse>
+                    <ellipse cx="40" cy="25" rx="12" ry="15" fill="${color}" opacity="0.9">
+                        <animateTransform attributeName="transform" type="scale" values="1,1;1.2,0.8;1,1" dur="0.3s" repeatCount="indefinite"/>
+                    </ellipse>
+                    <ellipse cx="30" cy="30" rx="3" ry="12" fill="${color}"/>
+                    <circle cx="30" cy="20" r="4" fill="${color}"/>
+                    <circle cx="20" cy="25" r="4" fill="white" opacity="0.6"/>
+                    <circle cx="40" cy="25" r="4" fill="white" opacity="0.6"/>
+                </g>
+            `;
+            
+            const startX = Math.random() * window.innerWidth;
+            const startY = window.innerHeight + 50;
+            const endX = Math.random() * window.innerWidth;
+            const endY = -100;
+            const duration = Math.random() * 5 + 4;
+            const delay = Math.random() * 2;
+            
+            butterfly.style.left = startX + 'px';
+            butterfly.style.top = startY + 'px';
+            butterfly.style.animation = `floatUp ${duration}s ease-in ${delay}s forwards`;
+            
+            document.body.appendChild(butterfly);
+            
+            setTimeout(() => {
+                butterfly.remove();
+            }, (duration + delay) * 1000);
+        }
+
+        // Add CSS animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatUp {
+                0% {
+                    transform: translateY(0) translateX(0) rotate(0deg);
+                    opacity: 0;
+                }
+                10% {
+                    opacity: 1;
+                }
+                90% {
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(-${window.innerHeight + 150}px) translateX(${Math.random() * 200 - 100}px) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Create butterflies continuously
+        for (let i = 0; i < 50; i++) {
+            setTimeout(() => {
+                createAnimatedButterfly();
+            }, i * 200);
+        }
+
+        // Keep creating butterflies
+        setInterval(() => {
+            createAnimatedButterfly();
+        }, 500);
+    </script>
+</body>
+</html>

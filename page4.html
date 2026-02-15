@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Crown</title>
+    <link rel="stylesheet" href="page2.css">
+</head>
+<body>
+    <div class="book-container">
+        <div class="book">
+            <div class="page page-left">
+                <div class="cinderella-art" style="display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #ffc8e0 0%, #ff9ec4 100%);">
+                    <svg width="450" height="450" viewBox="0 0 450 450" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 15px 25px rgba(255, 20, 147, 0.4));">
+                        <defs>
+                            <radialGradient id="wing3">
+                                <stop offset="0%" style="stop-color:#ff1493"/>
+                                <stop offset="50%" style="stop-color:#ff69b4"/>
+                                <stop offset="100%" style="stop-color:#ffb6c1"/>
+                            </radialGradient>
+                        </defs>
+                        <!-- Left wings - majestic -->
+                        <ellipse cx="100" cy="170" rx="100" ry="120" fill="url(#wing3)" opacity="0.95"/>
+                        <ellipse cx="130" cy="290" rx="80" ry="100" fill="url(#wing3)" opacity="0.95"/>
+                        <!-- Right wings - majestic -->
+                        <ellipse cx="350" cy="170" rx="100" ry="120" fill="url(#wing3)" opacity="0.95"/>
+                        <ellipse cx="320" cy="290" rx="80" ry="100" fill="url(#wing3)" opacity="0.95"/>
+                        <!-- Body -->
+                        <ellipse cx="225" cy="225" rx="20" ry="100" fill="#ff1493"/>
+                        <!-- Head -->
+                        <circle cx="225" cy="150" r="25" fill="#ff1493"/>
+                        <!-- Antennae -->
+                        <path d="M 217 140 Q 195 105 190 75" stroke="#ff1493" stroke-width="5" fill="none"/>
+                        <path d="M 233 140 Q 255 105 260 75" stroke="#ff1493" stroke-width="5" fill="none"/>
+                        <circle cx="190" cy="75" r="8" fill="#ffd700"/>
+                        <circle cx="260" cy="75" r="8" fill="#ffd700"/>
+                        <!-- Wing patterns - ornate -->
+                        <circle cx="100" cy="170" r="30" fill="white" opacity="0.8"/>
+                        <circle cx="350" cy="170" r="30" fill="white" opacity="0.8"/>
+                        <circle cx="130" cy="290" r="22" fill="white" opacity="0.8"/>
+                        <circle cx="320" cy="290" r="22" fill="white" opacity="0.8"/>
+                        <circle cx="80" cy="150" r="15" fill="#ffd700" opacity="0.7"/>
+                        <circle cx="370" cy="150" r="15" fill="#ffd700" opacity="0.7"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="page page-right">
+                <div class="page-content">
+                    <h2>Keep Going Forward!</h2>
+                    <p>You're becoming the strong, confident woman you were always meant to be. Don't stop now - you're doing amazing!</p>
+                    <p>I'll be here, cheering you on every step of the way. Believe in yourself as much as I believe in you. You've got this! 💪✨</p>
+                    <button class="next-btn" id="nextBtn">Continue →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <canvas id="butterflyCanvas"></canvas>
+    <canvas id="sunflowerCanvas"></canvas>
+    <script src="page2.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Journey</title>
+    <link rel="stylesheet" href="page2.css">
+</head>
+<body>
+    <div class="book-container">
+        <div class="book" id="book">
+            <div class="page page-left">
+                <div class="cinderella-art" style="display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #ffe8f5 0%, #ffc0d9 100%);">
+                    <svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 10px 20px rgba(255, 105, 180, 0.3));">
+                        <defs>
+                            <radialGradient id="wing1">
+                                <stop offset="0%" style="stop-color:#ff69b4"/>
+                                <stop offset="100%" style="stop-color:#ff1493"/>
+                            </radialGradient>
+                        </defs>
+                        <!-- Left wings -->
+                        <ellipse cx="120" cy="150" rx="80" ry="100" fill="url(#wing1)" opacity="0.9"/>
+                        <ellipse cx="140" cy="250" rx="60" ry="80" fill="url(#wing1)" opacity="0.9"/>
+                        <!-- Right wings -->
+                        <ellipse cx="280" cy="150" rx="80" ry="100" fill="url(#wing1)" opacity="0.9"/>
+                        <ellipse cx="260" cy="250" rx="60" ry="80" fill="url(#wing1)" opacity="0.9"/>
+                        <!-- Body -->
+                        <ellipse cx="200" cy="200" rx="15" ry="80" fill="#ff1493"/>
+                        <!-- Head -->
+                        <circle cx="200" cy="140" r="20" fill="#ff1493"/>
+                        <!-- Antennae -->
+                        <path d="M 195 130 Q 180 100 175 80" stroke="#ff1493" stroke-width="3" fill="none"/>
+                        <path d="M 205 130 Q 220 100 225 80" stroke="#ff1493" stroke-width="3" fill="none"/>
+                        <circle cx="175" cy="80" r="5" fill="#ff69b4"/>
+                        <circle cx="225" cy="80" r="5" fill="#ff69b4"/>
+                        <!-- Wing patterns -->
+                        <circle cx="120" cy="150" r="20" fill="white" opacity="0.6"/>
+                        <circle cx="280" cy="150" r="20" fill="white" opacity="0.6"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="page page-right">
+                <div class="page-content">
+                    <h2>When I First Saw You...</h2>
+                    <p>I saw a girl who felt weak, unsure of herself. But even then, I noticed something special - a quiet strength waiting to bloom.</p>
+                    <p>I've been watching you closely, and I see the courage in your eyes.</p>
+                    <button class="next-btn" id="nextBtn">Continue →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <canvas id="butterflyCanvas"></canvas>
+    <canvas id="sunflowerCanvas"></canvas>
+    <script src="page2.js"></script>
+</body>
+</html>

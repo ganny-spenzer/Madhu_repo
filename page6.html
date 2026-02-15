@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>And About Us?</title>
+    <link rel="stylesheet" href="page2.css">
+    <style>
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .popup-box {
+            background: linear-gradient(135deg, #fff 0%, #ffe8f5 100%);
+            padding: 60px 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(255, 20, 147, 0.5);
+            text-align: center;
+            border: 4px solid #ff69b4;
+            animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0) rotate(-180deg);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .popup-box h1 {
+            color: #ff1493;
+            font-size: 48px;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(255, 20, 147, 0.3);
+        }
+
+        .popup-box p {
+            color: #ff69b4;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="popup-overlay">
+        <div class="popup-box">
+            <h1>And About Us? 💕</h1>
+            <p>Wait for it...</p>
+        </div>
+    </div>
+
+    <canvas id="butterflyCanvas"></canvas>
+    <canvas id="sunflowerCanvas"></canvas>
+    <script src="page2.js"></script>
+    <script>
+        setTimeout(() => {
+            window.location.href = 'page7.html';
+        }, 3000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,371 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    background: linear-gradient(135deg, #ff69b4 0%, #ff1493 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.book-container {
+    perspective: 1500px;
+    z-index: 10;
+    position: relative;
+}
+
+.book {
+    width: 1100px;
+    height: 700px;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: bookOpen 2s ease-out forwards;
+    display: flex;
+}
+
+@keyframes bookOpen {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.page {
+    position: relative;
+    width: 550px;
+    height: 700px;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.page-left {
+    border-radius: 50% 20% 20% 50% / 40% 40% 60% 60%;
+    border-right: 3px solid rgba(255, 105, 180, 0.4);
+    animation: wingFlapLeft 1.5s ease-out 0.5s backwards, wingFloatLeft 3s ease-in-out infinite;
+    padding: 0;
+    background: radial-gradient(ellipse at 80% 50%, rgba(255, 240, 245, 0.98), rgba(255, 255, 255, 0.98));
+    transform-origin: right center;
+}
+
+.page-right {
+    border-radius: 20% 50% 50% 20% / 40% 40% 60% 60%;
+    animation: wingFlapRight 1.5s ease-out 0.5s backwards, wingFloatRight 3s ease-in-out infinite;
+    padding: 60px 50px;
+    background: radial-gradient(ellipse at 20% 50%, rgba(255, 240, 245, 0.98), rgba(255, 255, 255, 0.98));
+    transform-origin: left center;
+}
+
+@keyframes wingFlapLeft {
+    0% {
+        transform: translateX(-100px) rotateY(-30deg);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0) rotateY(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes wingFlapRight {
+    0% {
+        transform: translateX(100px) rotateY(30deg);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0) rotateY(0deg);
+        opacity: 1;
+    }
+}
+
+@keyframes wingFloatLeft {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes wingFloatRight {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Butterfly body in the center */
+.book::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 15px;
+    height: 180px;
+    background: linear-gradient(to bottom, #ff69b4 0%, #ff1493 50%, #ff69b4 100%);
+    border-radius: 20px;
+    z-index: 100;
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
+    animation: bodyGlow 2s ease-in-out infinite;
+}
+
+@keyframes bodyGlow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 105, 180, 0.9);
+    }
+}
+
+/* Butterfly head */
+.book::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%, -50%);
+    width: 25px;
+    height: 25px;
+    background: radial-gradient(circle, #ff1493, #ff69b4);
+    border-radius: 50%;
+    z-index: 101;
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.8);
+}
+
+/* Decorative spots on wings */
+.page-left::before {
+    content: '';
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, rgba(255, 182, 193, 0.4), transparent);
+    border-radius: 50%;
+}
+
+.page-left::after {
+    content: '';
+    position: absolute;
+    top: 60%;
+    left: 25%;
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle, rgba(255, 182, 193, 0.3), transparent);
+    border-radius: 50%;
+}
+
+.page-right::before {
+    content: '';
+    position: absolute;
+    top: 30%;
+    right: 30%;
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, rgba(255, 182, 193, 0.4), transparent);
+    border-radius: 50%;
+}
+
+.page-right::after {
+    content: '';
+    position: absolute;
+    top: 60%;
+    right: 25%;
+    width: 30px;
+    height: 30px;
+    background: radial-gradient(circle, rgba(255, 182, 193, 0.3), transparent);
+    border-radius: 50%;
+}
+
+@keyframes pageLeftSlide {
+    0% {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pageRightSlide {
+    0% {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.cinderella-art {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(ellipse at center, #ffeef8 0%, #ffe0f0 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.cinderella-art svg {
+    width: 70%;
+    height: 70%;
+    animation: fadeInArt 1.5s ease-out 1s backwards;
+}
+
+@keyframes fadeInArt {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.page-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+}
+
+.page-content h2 {
+    color: #d63384;
+    font-size: 2.2em;
+    margin-bottom: 25px;
+    font-weight: 400;
+    animation: fadeInText 1s ease-out 2s backwards;
+}
+
+.page-content p {
+    color: #555;
+    font-size: 1.3em;
+    line-height: 2.2;
+    text-align: justify;
+    animation: fadeInText 1s ease-out 2.3s backwards;
+    padding: 0 30px;
+    margin-bottom: 20px;
+}
+
+.page-content p:nth-child(3) {
+    animation-delay: 2.6s;
+}
+
+@keyframes fadeInText {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.next-btn {
+    background: linear-gradient(135deg, #ff69b4, #ff1493);
+    color: white;
+    border: none;
+    padding: 18px 45px;
+    font-size: 1.3em;
+    border-radius: 35px;
+    cursor: pointer;
+    margin-top: 35px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 20px rgba(255, 105, 180, 0.4);
+    animation: fadeInText 1s ease-out 2.5s backwards;
+    align-self: center;
+}
+
+.next-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 105, 180, 0.6);
+}
+
+#butterflyCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+#sunflowerCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.page-turn-butterflies {
+    animation: butterflyBurst 2s ease-out;
+}
+
+@keyframes butterflyBurst {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1);
+    }
+}
+
+.cinderella-art {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(ellipse at center, #ffeef8 0%, #ffe0f0 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.cinderella-art svg {
+    width: 70%;
+    height: 70%;
+    animation: fadeInArt 1.5s ease-out 1s backwards;
+}
+
+@keyframes fadeInArt {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

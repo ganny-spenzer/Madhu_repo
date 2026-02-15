@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Transformation</title>
+    <link rel="stylesheet" href="page2.css">
+</head>
+<body>
+    <div class="book-container">
+        <div class="book">
+            <div class="page page-left">
+                <div class="cinderella-art" style="display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #ffd4e5 0%, #ffb6c1 100%);">
+                    <svg width="420" height="420" viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 10px 20px rgba(255, 105, 180, 0.4));">
+                        <defs>
+                            <radialGradient id="wing2">
+                                <stop offset="0%" style="stop-color:#ffb6c1"/>
+                                <stop offset="100%" style="stop-color:#ff69b4"/>
+                            </radialGradient>
+                        </defs>
+                        <!-- Left wings - larger -->
+                        <ellipse cx="110" cy="160" rx="90" ry="110" fill="url(#wing2)" opacity="0.95"/>
+                        <ellipse cx="135" cy="270" rx="70" ry="90" fill="url(#wing2)" opacity="0.95"/>
+                        <!-- Right wings - larger -->
+                        <ellipse cx="310" cy="160" rx="90" ry="110" fill="url(#wing2)" opacity="0.95"/>
+                        <ellipse cx="285" cy="270" rx="70" ry="90" fill="url(#wing2)" opacity="0.95"/>
+                        <!-- Body -->
+                        <ellipse cx="210" cy="210" rx="18" ry="90" fill="#ff69b4"/>
+                        <!-- Head -->
+                        <circle cx="210" cy="145" r="22" fill="#ff69b4"/>
+                        <!-- Antennae -->
+                        <path d="M 203 135 Q 185 105 180 80" stroke="#ff69b4" stroke-width="4" fill="none"/>
+                        <path d="M 217 135 Q 235 105 240 80" stroke="#ff69b4" stroke-width="4" fill="none"/>
+                        <circle cx="180" cy="80" r="6" fill="#ff1493"/>
+                        <circle cx="240" cy="80" r="6" fill="#ff1493"/>
+                        <!-- Wing patterns -->
+                        <circle cx="110" cy="160" r="25" fill="white" opacity="0.7"/>
+                        <circle cx="310" cy="160" r="25" fill="white" opacity="0.7"/>
+                        <circle cx="135" cy="270" r="18" fill="white" opacity="0.7"/>
+                        <circle cx="285" cy="270" r="18" fill="white" opacity="0.7"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="page page-right">
+                <div class="page-content">
+                    <h2>Look at Your Progress!</h2>
+                    <p>Day by day, I've watched you grow stronger. You're building self-belief, finding your voice, and discovering your worth.</p>
+                    <p>Yes, you're still healing - and that's okay! Healing takes time, and you're doing beautifully. I'm so proud of how far you've come.</p>
+                    <button class="next-btn" id="nextBtn">Continue →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <canvas id="butterflyCanvas"></canvas>
+    <canvas id="sunflowerCanvas"></canvas>
+    <script src="page2.js"></script>
+</body>
+</html>
