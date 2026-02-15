@@ -369,3 +369,170 @@ body {
         transform: scale(1);
     }
 }
+
+/* Responsive Design for Mobile and Tablets */
+@media screen and (max-width: 1200px) {
+    .book {
+        width: 900px;
+        height: 600px;
+    }
+
+    .page {
+        width: 450px;
+        height: 600px;
+    }
+
+    .page-right {
+        padding: 40px 30px;
+    }
+
+    .page-content h2 {
+        font-size: 1.8em;
+    }
+
+    .page-content p {
+        font-size: 1.1em;
+        padding: 0 20px;
+    }
+}
+
+@media screen and (max-width: 968px) {
+    .book {
+        width: 700px;
+        height: 500px;
+    }
+
+    .page {
+        width: 350px;
+        height: 500px;
+    }
+
+    .page-right {
+        padding: 30px 25px;
+    }
+
+    .page-content h2 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+
+    .page-content p {
+        font-size: 1em;
+        line-height: 1.8;
+        padding: 0 15px;
+    }
+
+    .next-btn {
+        padding: 15px 35px;
+        font-size: 1.1em;
+    }
+
+    .book::before {
+        width: 12px;
+        height: 140px;
+    }
+
+    .book::after {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .book {
+        width: 90vw;
+        height: 70vh;
+        max-width: 600px;
+        max-height: 450px;
+    }
+
+    .page {
+        width: 45vw;
+        height: 70vh;
+        max-width: 300px;
+        max-height: 450px;
+    }
+
+    .page-right {
+        padding: 25px 20px;
+    }
+
+    .page-content h2 {
+        font-size: 1.3em;
+        margin-bottom: 15px;
+    }
+
+    .page-content p {
+        font-size: 0.9em;
+        line-height: 1.6;
+        padding: 0 10px;
+        margin-bottom: 15px;
+    }
+
+    .next-btn {
+        padding: 12px 30px;
+        font-size: 1em;
+        margin-top: 20px;
+    }
+
+    .book::before {
+        width: 10px;
+        height: 100px;
+    }
+
+    .book::after {
+        width: 15px;
+        height: 15px;
+    }
+
+    .cinderella-art svg {
+        width: 80%;
+        height: 80%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .book {
+        width: 95vw;
+        height: 65vh;
+        max-height: 400px;
+    }
+
+    .page {
+        width: 47.5vw;
+        height: 65vh;
+        max-height: 400px;
+    }
+
+    .page-right {
+        padding: 20px 15px;
+    }
+
+    .page-content h2 {
+        font-size: 1.1em;
+        margin-bottom: 12px;
+    }
+
+    .page-content p {
+        font-size: 0.85em;
+        line-height: 1.5;
+        padding: 0 8px;
+        margin-bottom: 12px;
+    }
+
+    .next-btn {
+        padding: 10px 25px;
+        font-size: 0.9em;
+        margin-top: 15px;
+    }
+
+    .book::before {
+        width: 8px;
+        height: 80px;
+    }
+
+    .book::after {
+        width: 12px;
+        height: 12px;
+    }
+}

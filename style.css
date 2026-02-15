@@ -86,3 +86,44 @@ body {
     pointer-events: none;
     z-index: 1000;
 }
+
+/* Responsive Design for Mobile and Tablets */
+@media screen and (max-width: 768px) {
+    .message-box {
+        padding: 40px 30px;
+        max-width: 90%;
+        margin: 20px;
+    }
+
+    .title {
+        font-size: 1.8em;
+    }
+
+    .subtitle {
+        font-size: 1.2em;
+    }
+
+    .surprise-btn {
+        padding: 15px 40px;
+        font-size: 1.1em;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .message-box {
+        padding: 30px 20px;
+    }
+
+    .title {
+        font-size: 1.5em;
+    }
+
+    .subtitle {
+        font-size: 1em;
+    }
+
+    .surprise-btn {
+        padding: 12px 30px;
+        font-size: 1em;
+    }
+}
